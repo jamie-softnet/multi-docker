@@ -3,21 +3,21 @@ services:
     - docker
 
 before_install:
-  - docker build -t jamie-softnet/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t jamiesoftnet/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run jamie-softnet/react-test npm test --  --coverage
+  - docker run jamiesoftnet/react-test npm test --  --coverage
 
 after_success: 
-  - docker build -t jamie-softnet/multi-client ./client
-  - docker build -t jamie-softnet/multi-nginx ./nginx
-  - docker build -t jamie-softnet/multi-server ./server
-  - docker build -t jamie-sfotnet/multi-worker ./worker
+  - docker build -t jamiesoftnet/multi-client ./client
+  - docker build -t jamiesoftnet/multi-nginx ./nginx
+  - docker build -t jamiesoftnet/multi-server ./server
+  - docker build -t jamiesoftnet/multi-worker ./worker
   # login to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # take those images and push them to docker hub
-  - docker push jamie-softnet/multi-client
-  - docker push jamie-softnet/multi-nginx
-  - docker push jamie-softnet/multi-server
-  - docker push jamie-softnet/multi-worker
+  - docker push jamiesoftnet/multi-client
+  - docker push jamiesoftnet/multi-nginx
+  - docker push jamiesoftnet/multi-server
+  - docker push jamiesoftnet/multi-worker
 
